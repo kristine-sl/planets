@@ -1,0 +1,28 @@
+html 
+{
+  box-sizing: border-box;
+}
+
+*, *:before, *:after 
+{
+  box-sizing: inherit;
+}
+
+body 
+{
+	font-family: 'Raleway', sans-serif;
+	background: map-get( $colors, 'sky' ); 
+	padding: 20px; 
+}
+
+@font-face 
+{
+    font-family: 'icomoon';
+    src:    url('fonts/icomoon.eot?klk0t7');
+    src:    url('fonts/icomoon.eot?klk0t7#iefix') format('embedded-opentype'),
+        	url('fonts/icomoon.ttf?klk0t7') format('truetype'),
+        	url('fonts/icomoon.woff?klk0t7') format('woff'),
+        	url('fonts/icomoon.svg?klk0t7#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

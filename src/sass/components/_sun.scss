@@ -1,0 +1,19 @@
+.sun 
+{
+	position: absolute; 
+	width: 500px; 
+	height: 500px; 
+	border-radius: 50%; 
+	background: map-get( $colors, 'sun' ); 
+	right: 0;
+	top: 50%;
+	transform: translateY( -250px );
+	//left: -200px; 
+	//margin-right: -400px; 
+
+	&-container 
+	{
+		position: relative;
+		width: 200px;
+	}
+}

@@ -1,0 +1,67 @@
+.parameter 
+{
+	background: map-get( $colors, 'parameter' ); 
+	width: map-get( $layout, 'parameter-width'); 
+	height: map-get( $layout, 'parameter-height'); 
+	border-radius: map-get( $layout, 'parameter-border-radius'); 
+	//margin: 5px 25px;
+	display: flex; 
+	align-items: center; 
+	justify-content: center; 
+	font-weight: 400; 
+	font-size: 14px; 
+	color: white; 
+
+	&-menu
+	{
+		height: 100%; 
+		display: flex; 
+		flex-direction: column; 
+		border-radius: 5px; 
+		z-index: map-get( $layout, 'parameter-z-index' ); 
+	}
+
+	&-container
+	{
+		background: map-get( $colors, 'parameter-background'); 
+		display: flex; 
+		justify-content: center; 
+		align-items: center; 
+		flex-direction: column; 
+		height: 100%; 
+		border-radius: 0 0 10px 10px; 
+
+		& .parameter
+		{
+			margin: 5px 25px; 
+		}
+	}
+
+	&-list
+	{
+		padding: 0; 
+	}
+
+	&-tab
+	{
+		background: map-get( $colors, 'parameter' );  
+		padding: 10px; 
+		text-align: center; 
+		color: white;
+		width: 100%;
+		border-radius: 10px 10px 0 0; 
+		cursor: pointer; 
+
+		&--active
+		{
+			background: map-get( $colors, 'parameter-background' ); 
+			border: none; 
+		}
+
+		&-container
+		{
+			display: flex; 
+			width: 100%; 
+		}
+	}
+}

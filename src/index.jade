@@ -1,0 +1,43 @@
+html( lang = 'no', ng-app = 'app' )
+	head
+		meta( charset = 'utf-8' )
+		title Planets
+		meta( name = 'description' content = '' )
+		meta( name = 'viewport' content = 'initial-scale = 1.0, maximum-scale = 1.0, user-scalable = 0' )
+		link( rel = 'stylesheet' href = 'https://fonts.googleapis.com/css?family=Raleway:400,600,200,800' )
+		link( rel = 'stylesheet' href = 'https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css' )
+		link( rel = 'stylesheet' href = 'app.css' )
+	body
+
+		.container
+
+			.input-container( ng-controller = 'ParameterCtrl as parameter')
+				.input
+					.input-label Order 
+					ul.input-box( dnd-list = 'parameter.input.order.item' dnd-drop = 'parameter.droppedInInput( parameter.input.order, item )' )
+						li.parameter( ng-repeat = 'item in parameter.input.order.item' dnd-draggable = 'item' dnd-moved = 'parameter.input.order.item.splice( $index, 1)' ) {{ item }}
+				.input 
+					.input-label Size
+					ul.input-box( dnd-list = 'parameter.input.size.item' dnd-drop = 'parameter.droppedInInput( parameter.input.size, item )' )
+						li.parameter( ng-repeat = 'item in parameter.input.size.item' dnd-draggable = 'item' dnd-moved = 'parameter.input.size.item.splice( $index, 1)' ) {{ item }}
+
+			.sun-container
+				.sun
+			.planet-container( ng-controller = 'SolarSystemCtrl as solarSystem' )
+				.planet( ng-repeat = 'planet in solarSystem.planets' ng-style = " { 'background': planet.color } " )
+					.planet-label {{ planet.name }}
+
+
+			.parameter-menu( ng-controller = 'ParameterCtrl as parameter' )
+				.parameter-tab-container
+					.parameter-tab( ng-click = 'parameter.activeTab = parameter.dataTab' ng-class = " { 'parameter-tab--active': parameter.activeTab === parameter.dataTab } " )
+						span.icon.icon--planet
+					.parameter-tab( ng-click = 'parameter.activeTab = parameter.chemistryTab' ng-class = " { 'parameter-tab--active': parameter.activeTab === parameter.chemistryTab } " )
+						span.icon.icon--lab
+				.parameter-container
+					ul.parameter-list( dnd-list = 'parameter.parameters[0]' ng-show = ' parameter.activeTab === parameter.dataTab ')
+						li.parameter( ng-repeat = 'item in parameter.parameters[ 0 ]' dnd-draggable = 'item' dnd-dragstart = 'parameter.hideParameter( parameter.parameters[0], $index )' dnd-moved = ' parameter.parameters[0].splice( $index, 1 ) ' /*dnd-selected = 'parameter.moveByClickToInput( parameter.parameters[0], $index )'*/ ) {{ item }}
+					ul.parameter-list( dnd-list = 'parameter.parameters[1] ' ng-show = 'parameter.activeTab === parameter.chemistryTab ')
+						li.parameter( ng-repeat = 'item in parameter.parameters[ 1 ]' dnd-draggable = 'item' dnd-dragstart = 'parameter.hideParameter( parameter.parameters[1], $index )' dnd-moved = 'parameter.parameters[1].splice( $index, 1 ) ' ) {{ item }}
+
+		script( src = 'app.js' )

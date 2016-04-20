@@ -1,0 +1,33 @@
+.input
+{
+	display: flex; 
+	align-items: center; 
+	margin: 0 20px; 
+
+	&-label
+	{
+		margin: 10px; 
+		font-weight: 600; 
+		color: white;
+	}
+
+	&-box
+	{
+		width: map-get( $layout, 'parameter-width' );
+		height: map-get( $layout, 'parameter-height'); 
+		background: map-get( $colors, 'parameter-background' ); 	 
+		border-radius: map-get( $layout, 'parameter-border-radius' ); 	
+		// padding: map-get( $layout, 'parameter-padding' ); 
+		padding: 0; 
+	}
+
+	&-container
+	{
+		position: absolute; 
+		width: 100%; 
+		display: flex; 
+		justify-content: center; 
+		align-items: center; 
+		z-index: map-get( $layout, 'input-z-index' );
+	}
+}

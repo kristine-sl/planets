@@ -1,0 +1,27 @@
+.planet
+{
+
+	width: 60px; 
+	height: 60px; 
+	border-radius: 50%; 
+	margin: 15px; 
+
+	display: flex; 
+	justify-content: center; 
+	align-items: flex-end; 
+	color: white; 
+
+	&-label 
+	{
+		position: relative; 
+		top: 40px; 
+	}
+
+	&-container
+	{
+		display: flex; 
+		width: 100%; 
+		justify-content: center; 
+		align-items: center; 
+	}
+}

@@ -1,0 +1,26 @@
+$colors: (
+	'sky': #141D3C,
+	'sun': #f1c40f, 
+	'mercury': #D2D7D3, 
+	'venus': #F5D76E, 
+	//'earth': #22A7F0, 
+	'earth': #1abc9c,
+	'mars': #CF3A24, 
+	'jupiter': #BFBFBF, 
+	'saturn': #F3C13A, 
+	'uranus': #89C4F4, 
+	'neptune': #4B77BE,
+
+	'parameter-background': #67809F, 
+	'parameter': #2C3E60
+); 
+
+$layout: (
+	'parameter-width': 200px,
+	'parameter-height': 45px,
+	'parameter-border-radius': 20px,
+	'parameter-padding': 18px, 
+	'parameter-z-index': 2,
+
+	'input-z-index' : 1
+);  
