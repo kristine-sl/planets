@@ -61,9 +61,9 @@ const watch = () => {
 	gulp.watch( 'src/index.jade', buildHtml );
 	gulp.watch( 'src/js', buildJavaScript );
 	gulp.watch( 'src/sass', buildCss );
+	gulp.watch( 'src/assets', moveAssets );
 
-	gulp.watch( 'public/index.html' ).on( 'change', server.reload );
-	gulp.watch( 'public/app.js' ).on( 'change', server.reload );
+	gulp.watch( 'public' ).on( 'change', server.reload );
 }
 
 const build = gulp.series( clean, gulp.parallel( buildCss, buildHtml, buildJavaScript ), moveAssets, gulp.parallel( connect, watch ) )

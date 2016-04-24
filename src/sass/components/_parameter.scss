@@ -40,6 +40,7 @@
 	&-list
 	{
 		padding: 0; 
+		height: 100%; 
 	}
 
 	&-tab
@@ -63,5 +64,10 @@
 			display: flex; 
 			width: 100%; 
 		}
+	}
+
+	&-input-active 
+	{
+		border: 5px solid white; 
 	}
 }

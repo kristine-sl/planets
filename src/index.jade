@@ -15,16 +15,18 @@ html( lang = 'no', ng-app = 'app' )
 				.input
 					.input-label Order 
 					ul.input-box( dnd-list = 'parameter.input.order.item' dnd-drop = 'parameter.droppedInInput( parameter.input.order, item )' )
-						li.parameter( ng-repeat = 'item in parameter.input.order.item' dnd-draggable = 'item' dnd-moved = 'parameter.input.order.item.splice( $index, 1)' ) {{ item }}
+						li.parameter( ng-repeat = 'item in parameter.input.order.item' dnd-draggable = 'item' dnd-moved = 'parameter.input.order.item.splice( $index, 1)' /*dnd-dragover = 'parameter.active = true' ng-class = " { 'parameter-input-active': parameter.active } "*/ ) {{ item.name }}
 				.input 
 					.input-label Size
 					ul.input-box( dnd-list = 'parameter.input.size.item' dnd-drop = 'parameter.droppedInInput( parameter.input.size, item )' )
-						li.parameter( ng-repeat = 'item in parameter.input.size.item' dnd-draggable = 'item' dnd-moved = 'parameter.input.size.item.splice( $index, 1)' ) {{ item }}
+						li.parameter( ng-repeat = 'item in parameter.input.size.item' dnd-draggable = 'item' dnd-moved = 'parameter.input.size.item.splice( $index, 1)' dnd-dragstart = 'parameter.hideParameter( parameter.input.size.item, $index )') {{ item.name }}
 
 			.sun-container
 				.sun
 			.planet-container( ng-controller = 'SolarSystemCtrl as solarSystem' )
-				.planet( ng-repeat = 'planet in solarSystem.planets' ng-style = " { 'background': planet.color } " )
+				.planet-wrapper( ng-repeat = 'planet in solarSystem.planets' ng-style = " { 'margin': solarSystem.margin, 'width': planet.size, 'height': planet.size } "  )
+					.planet( ng-style = " { 'background': planet.color }" )
+						.planet-line
 					.planet-label {{ planet.name }}
 
 
@@ -36,8 +38,8 @@ html( lang = 'no', ng-app = 'app' )
 						span.icon.icon--lab
 				.parameter-container
 					ul.parameter-list( dnd-list = 'parameter.parameters[0]' ng-show = ' parameter.activeTab === parameter.dataTab ')
-						li.parameter( ng-repeat = 'item in parameter.parameters[ 0 ]' dnd-draggable = 'item' dnd-dragstart = 'parameter.hideParameter( parameter.parameters[0], $index )' dnd-moved = ' parameter.parameters[0].splice( $index, 1 ) ' /*dnd-selected = 'parameter.moveByClickToInput( parameter.parameters[0], $index )'*/ ) {{ item }}
+						li.parameter( ng-repeat = 'item in parameter.parameters[ 0 ]' dnd-draggable = 'item' dnd-dragstart = 'parameter.hideParameter( parameter.parameters[0], $index )' dnd-moved = ' parameter.parameters[0].splice( $index, 1 ) ' /*dnd-selected = 'parameter.moveByClickToInput( parameter.parameters[0], $index )'*/ ) {{ item.name }}
 					ul.parameter-list( dnd-list = 'parameter.parameters[1] ' ng-show = 'parameter.activeTab === parameter.chemistryTab ')
-						li.parameter( ng-repeat = 'item in parameter.parameters[ 1 ]' dnd-draggable = 'item' dnd-dragstart = 'parameter.hideParameter( parameter.parameters[1], $index )' dnd-moved = 'parameter.parameters[1].splice( $index, 1 ) ' ) {{ item }}
+						li.parameter( ng-repeat = 'item in parameter.parameters[ 1 ]' dnd-draggable = 'item' dnd-dragstart = 'parameter.hideParameter( parameter.parameters[1], $index )' dnd-moved = 'parameter.parameters[1].splice( $index, 1 ) ' ) {{ item.name }}
 
 		script( src = 'app.js' )

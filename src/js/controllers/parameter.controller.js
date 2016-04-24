@@ -1,40 +1,96 @@
-export default class SolarSystemCtrl {
-	constructor () {
+export default class ParameterCtrl {
 
-		this.dataTab = 0, this.chemistryTab = 1; 
+	constructor ( Resizer, Origin, $timeout, $interval, $scope ) {
+
+		this.dataTab = 0, this.chemistryTab = 1;  
 
 		this.parameters = [
 			[ 
-				'Mass',
-				'Volume',
-				'Mean radius',
-				'Surface temperature',
-				'Surface gravity',
-				'Orbital period',
-				'Orbital speed',
-				'Number of moons',
-				'Age'
-			] , [
-				'Carbon dioxide',
-				'Nitrogen',
-				'Sulfur dioxide',
-				'Argon',
-				'Water vapor',
-				'Carbon monoxide',
-				'Helium',
-				'Neon',
-				'Oxygen'
-			]
+				{
+					name: 'Mass',
+					key: 'mass'
+				},{
+					name: 'Volume',
+					key: 'volume'
+				},{
+					name: 'Mean radius',
+					key: 'radius'
+				},{
+					name: 'Min. Surface temperature',
+					key: 'minTemperature'
+				},{
+					name: 'Max. Surface temperature',
+					key: 'maxTemperature'
+				},{
+					name: 'Surface gravity',
+					key: 'surfaceGravity'
+				},{
+					name: 'Orbital period',
+					key: 'orbitalPeriod'
+				},{
+					name: 'Orbital speed',
+					key: 'orbitalSpeed'
+				},{
+					name: 'Number of moons',
+					key: 'moons'
+				},{
+					name: 'Perihelion',
+					key:'perihelion'
+				},{
+					name: 'Aphelion',
+					key:'aphelion'
+				},{
+					name: 'Sidereal rotation period',
+					key:'rotationPeriod'
+				}
+			],[
+				{
+					name: 'Oxygen',
+					key: 'oxygen'
+				},{
+					name: 'Carbon dioxide',
+					key: 'carbonDioxide'
+				},{
+					name: 'Carbon monoxide',
+					key: 'carbonMonoxide'
+				},{
+					name: 'Nitrogen',
+					key: 'nitrogren'
+				},{
+					name: 'Sulfur dioxide',
+					key: 'sulfurDioxide'
+				},{
+					name: 'Argon',
+					key: 'argon'
+				},{
+					name: 'Water vapor',
+					key: 'waterVapor'
+				},{
+					name: 'Helium',
+					key: 'helium'
+				},{
+					name: 'Hydrogen',
+					key: 'hydrogen'
+				},{
+					name: 'Sodium',
+					key: 'sodium'
+				},{
+					name: 'Potassium',
+					key: 'potassium'
+				}
+			]	
 		]
 
 		this.input = {
 			order: {
 				item: [], 
-				origin: null
+				origin: null, 
+				name: 'order'
 			} ,
 			size: {
 				item: [], 
-				origin: null
+				origin: null, 
+				name: 'order'
 			}
 		}
 
@@ -42,37 +98,23 @@ export default class SolarSystemCtrl {
 
 		this.droppedInInput = ( input, item ) => {
 
-			console.log( 'Dropped' ); 
+			if( input.item.length > 0 ) {
+				console.log( input.item )
+				input.origin.push( input.item[0] )
+				input.item.splice( 0, input.item.length )
+			}
 
-			// if( input.item.length != 0 ) {
-			// 	input.origin.push( item )
-			// 	input.item.splice( 0, 1 ); 
-			// }
+			input.item.push( item )
+			Resizer.key = item.key
 
-			input.item.push( item );
-
-			return true; 
+			input.origin = Origin.currentParent
+			$scope.$apply() // to make the drop register
 		}
 
-		this.moveByClickToInput = ( origin, index ) => {
+		this.hideParameter = ( parent, index ) => {
 
-			console.log(  'moving' )
-
-			var item = origin[ index ]
-			origin.splice( index, 1 )
-
-			// If both are filled, do not remove 
-			if( this.input.order.length === 0) {
-				this.input.order.push( item )
-			} else if( this.input.size.length === 0 ) {
-				this.input.size.push( item )
-			} 
-		}
-		this.currentParameter; 
-
-		this.hideParameter = () => {
-
-			
+			parent.splice( index, 1 )
+			Origin.currentParent = parent
 		}
 	}
 }
