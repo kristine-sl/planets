@@ -13,6 +13,7 @@ body
 	font-family: 'Raleway', sans-serif;
 	background: map-get( $colors, 'sky' ); 
 	padding: 20px; 
+    overflow: hidden;
 }
 
 @font-face 

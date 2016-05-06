@@ -1,6 +1,6 @@
 export default class SolarSystemCtrl {
 
-	constructor ( $scope, $timeout, $interval, $http, $filter, $window, Resizer, Menus ) {
+	constructor ( $scope, $document, $timeout, $interval, $http, $filter, $window, Resizer, Menus ) {
 
 		const vm = this
 		this.margin = 15
@@ -14,45 +14,101 @@ export default class SolarSystemCtrl {
 
 		this.sunContainerWidth = document.querySelector( '.sun-container' ).clientWidth
 		
+		this.activePlanet = false;
+
+		this.openPlanet = ( planet ) => {
+
+			if( this.activePlanet ) {
+				this.planets[this.activePlanet].size = this.oldSize
+			}
+
+			this.oldSize = planet.size
+			planet.size = 100
+
+			$timeout( () => {
+				this.activePlanet = planet;
+				for ( var i = 0; i < this.planets.length; i++ ) {
+					if ( this.planets[ i ].name === this.activePlanet.name ) {
+						this.planets[ i ].isOpen = true;
+					}
+				}
+			}, 100 )
+		}
+
+		this.closePlanet = () => {
+			for ( var i = 0; i < this.planets.length; i++ ) {
+				if ( this.planets[ i ].name === this.activePlanet.name ) {
+					this.planets[ i ].size = this.oldSize
+				}
+			}
+			this.activePlanet = false;
+
+			$timeout( () => {
+				for ( var i = 0; i < this.planets.length; i++ ) {
+					if ( this.planets[ i ].name === this.activePlanet.name ) {
+						this.planets[ i ].isOpen = false;
+					}
+				}
+			}, 500 )
+		}
+
+		$document.bind( 'keydown keypress', function ( event ) {
+	      	if( event.which === 27 ) {
+	      		vm.closePlanet();
+	        	event.preventDefault();
+	        };
+	    } );
+
 		this.planets = [
 			{
 				name: 'Mercury',
 				color: '#D2D7D3', 
-				size: 0
+				size: 0, 
+				none: 1
 			} , {
 				name: 'Venus',
 				color: '#F5D76E', 
-				size: 0
+				size: 0, 
+				none: 1
 			} , {
 				name: 'Earth',
 				color: '#1abc9c', 
-				size: 0
+				size: 0, 
+				none: 1
 			} , {
 				name: 'Mars',
 				color: '#CF3A24', 
-				size: 0
+				size: 0, 
+				none: 1
 			} , {
 				name: 'Jupiter',
 				color: '#BFBFBF', 
-				size: 0
+				size: 0, 
+				none: 1
 			} , {
 				name: 'Saturn',
 				color: '#F3C13A', 
-				size: 0
+				size: 0, 
+				none: 1
 			} , {
 				name: 'Uranus',
 				color: '#89C4F4', 
-				size: 0
+				size: 0, 
+				none: 1
 			} , {
 				name: 'Neptune',
 				color: '#4B77BE', 
-				size: 0
+				size: 0, 
+				none: 1
 			} , {
 				name: 'Pluto',
 				color: '#F27935', 
-				size: 0
+				size: 0, 
+				none: 1
 			}
 		]
+
+		this.currentTab = 'description'
 
 		this.sortedPlanets = () => {
 			return $filter( 'orderBy' )( this.planets, Resizer.sortBy );
@@ -75,7 +131,7 @@ export default class SolarSystemCtrl {
 						planet2.moons = planet1.moons						// quantity
 						planet2.perihelion = planet1.perihelion				// astronomical unit 
 						planet2.aphelion = planet1.aphelion					// astronomical unit
-						planet2.rotationPeriod = planet1.rotationPeriod		// hoursm
+						planet2.rotationPeriod = planet1.rotationPeriod		// hours
 
 																			// percentage by volume (all)
 						planet2.oxygen = planet1.oxygen * planet1.volume
@@ -95,6 +151,21 @@ export default class SolarSystemCtrl {
 			} )
 		} )
 
+		$http.get( 'json/planet-info.json' ).then( ( results ) => { 
+			// console.log( results.data )
+			results.data.forEach( planet1 => {
+				this.planets.forEach( planet2 => {
+					if( planet1.name === planet2.name ) {
+
+						planet2.description = planet1.description
+						planet2.image = planet1.image	
+					}
+				} )
+			} )
+		} )
+
+		console.log( this.planets )
+
 		var $planetContainer = document.querySelector( '.planet-container' )
 
 		// angular.element($window).bind('resize', ()->
@@ -107,7 +178,7 @@ export default class SolarSystemCtrl {
 			vm.maxWidth = value
         } );
 
-        var currentSizeParameter = 'radius'; 
+        var currentSizeParameter = 'none'; 
         const outerSpacing = 100;
 
 		// Initial value
@@ -166,5 +237,6 @@ export default class SolarSystemCtrl {
 	    	}, 1 )
 
         }
+		// this.openPlanet( this.planets[ 0 ] );
 	}
 }

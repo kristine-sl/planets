@@ -1,6 +1,6 @@
 export default class Resizer { 
 
 	constructor () {
-		this.sortBy = 'color';
+		this.sortBy = '';
 	}
 }
