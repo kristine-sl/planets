@@ -1,8 +1,9 @@
 export default class ParameterCtrl {
 
-	constructor ( Resizer, Origin, $timeout, $interval, $scope ) {
+	constructor ( Resizer, Origin, Menus, $timeout, $interval, $scope ) {
 
 		this.dataTab = 0, this.chemistryTab = 1;  
+		this.menus = Menus; 
 
 		this.parameters = [
 			[ 
@@ -90,7 +91,7 @@ export default class ParameterCtrl {
 			size: {
 				item: [], 
 				origin: null, 
-				name: 'order'
+				name: 'size'
 			}
 		}
 
@@ -99,13 +100,20 @@ export default class ParameterCtrl {
 		this.droppedInInput = ( input, item ) => {
 
 			if( input.item.length > 0 ) {
-				console.log( input.item )
 				input.origin.push( input.item[0] )
 				input.item.splice( 0, input.item.length )
 			}
 
 			input.item.push( item )
-			Resizer.key = item.key
+
+			switch ( input.name ) {
+				case 'order':
+					Resizer.sortBy = item.key
+					break
+				case 'size':
+					Resizer.key = item.key
+					break
+			}
 
 			input.origin = Origin.currentParent
 			$scope.$apply() // to make the drop register

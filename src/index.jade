@@ -11,7 +11,7 @@ html( lang = 'no', ng-app = 'app' )
 
 		.container
 
-			.input-container( ng-controller = 'ParameterCtrl as parameter')
+			.input-container( ng-controller = 'ParameterCtrl as parameter' ng-hide = 'parameter.menus.hidden' )
 				.input
 					.input-label Order 
 					ul.input-box( dnd-list = 'parameter.input.order.item' dnd-drop = 'parameter.droppedInInput( parameter.input.order, item )' )
@@ -21,16 +21,17 @@ html( lang = 'no', ng-app = 'app' )
 					ul.input-box( dnd-list = 'parameter.input.size.item' dnd-drop = 'parameter.droppedInInput( parameter.input.size, item )' )
 						li.parameter( ng-repeat = 'item in parameter.input.size.item' dnd-draggable = 'item' dnd-moved = 'parameter.input.size.item.splice( $index, 1)' dnd-dragstart = 'parameter.hideParameter( parameter.input.size.item, $index )') {{ item.name }}
 
-			.sun-container
-				.sun
-			.planet-container( ng-controller = 'SolarSystemCtrl as solarSystem' )
-				.planet-wrapper( ng-repeat = 'planet in solarSystem.planets' ng-style = " { 'margin': solarSystem.margin, 'width': planet.size, 'height': planet.size } "  )
+			.sun-container( ng-controller = 'SunController as sun' )
+				.sun( ng-style = " { 'height': sun.height, 'transform': 'translateY(' + ( sun.height / 2 * -1 ) + 'px)' } " )
+			.planet-container( ng-controller = 'SolarSystemCtrl as solarSystem' ng-style = " { 'margin-left': solarSystem.sunContainerWidth } ")
+				.planet-wrapper( ng-repeat = 'planet in solarSystem.planets' ng-style = " { 'margin': solarSystem.margin, 'width': planet.size, 'height': planet.size, 'left': solarSystem.calculateLeftValue( $index ) }"  )
 					.planet( ng-style = " { 'background': planet.color }" )
 						.planet-line
 					.planet-label {{ planet.name }}
+				span.icon.icon-enlarge( ng-hide = 'solarSystem.menus.hidden' ng-click = 'solarSystem.toggleMenus()')
+				span.icon.icon-shrink( ng-show = 'solarSystem.menus.hidden' ng-click = 'solarSystem.toggleMenus()')
 
-
-			.parameter-menu( ng-controller = 'ParameterCtrl as parameter' )
+			.parameter-menu( ng-controller = 'ParameterCtrl as parameter' ng-hide = "parameter.menus.hidden" )
 				.parameter-tab-container
 					.parameter-tab( ng-click = 'parameter.activeTab = parameter.dataTab' ng-class = " { 'parameter-tab--active': parameter.activeTab === parameter.dataTab } " )
 						span.icon.icon--planet

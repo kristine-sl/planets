@@ -10,11 +10,38 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 	
-	&--planet:before {
+	&--planet:before 
+	{
 	    content: "\e901";
 	}
 	
-	&--lab:before {
+	&--lab:before 
+	{
 	    content: "\e902";
+	}
+
+	&-enlarge:before
+	{
+		content: "\e907";
+	}
+
+	&-shrink:before
+	{
+		content: "\e909"; 
+	}
+
+	&-enlarge, &-shrink
+	{
+		position: absolute; 
+		color: map-get( $colors, 'parameter-background' ); 
+		top: 12px; 
+		right: 20px;
+		cursor: pointer; 
+		z-index: 99999999;
+
+		&:hover
+		{
+			color: white; 
+		}
 	}
 }

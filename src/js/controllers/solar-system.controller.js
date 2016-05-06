@@ -1,15 +1,18 @@
 export default class SolarSystemCtrl {
 
-	constructor ( $scope, $timeout, $http, Resizer ) {
+	constructor ( $scope, $timeout, $interval, $http, $filter, $window, Resizer, Menus ) {
 
-		const vm = this;
-		this.margin = 15; 
-		
+		const vm = this
+		this.margin = 15
+		this.menus = Menus
+
 		$scope.$watch( () => {
 			return Resizer.key
 		}, key => {
 			vm.calculatePlanetSize( key )
 		} )
+
+		this.sunContainerWidth = document.querySelector( '.sun-container' ).clientWidth
 		
 		this.planets = [
 			{
@@ -51,6 +54,10 @@ export default class SolarSystemCtrl {
 			}
 		]
 
+		this.sortedPlanets = () => {
+			return $filter( 'orderBy' )( this.planets, Resizer.sortBy );
+		}
+
 		$http.get( 'json/parameters-planet.json' ).then( ( results ) => { 
 			// console.log( results.data )
 			results.data.forEach( planet1 => {
@@ -90,20 +97,33 @@ export default class SolarSystemCtrl {
 
 		var $planetContainer = document.querySelector( '.planet-container' )
 
-		$scope.$watch( function () {
+		// angular.element($window).bind('resize', ()->
+		//  	$scope.$apply();
+		// )
+
+		$scope.$watch( () => {
             return $planetContainer.clientWidth
-        }, function( value ) {
+        }, ( value ) => {
 			vm.maxWidth = value
         } );
 
+        var currentSizeParameter = 'radius'; 
+        const outerSpacing = 100;
+
 		// Initial value
-        $timeout(function() { vm.calculatePlanetSize( 'radius' ) }, 10);
+        $timeout(function() { vm.calculatePlanetSize() }, 10)
 
         this.calculatePlanetSize = ( parameter ) => {
 
+        	if( !parameter ) {
+        		parameter = currentSizeParameter
+        	} else {
+        		currentSizeParameter = parameter 
+        	}
+
         	this.margin = this.maxWidth / 60; 
         	var totalMargin = this.margin * 2 * this.planets.length;
-        	var totalWidth = this.maxWidth - totalMargin - 100; 
+        	var totalWidth = this.maxWidth - totalMargin - outerSpacing; 
         	
         	var parameterTotal = 0; 
 
@@ -116,6 +136,34 @@ export default class SolarSystemCtrl {
         	this.planets.forEach( planet => {
         		planet.size = widthPrValue * planet[ parameter ]
         	} )
+        }
+
+        this.calculateLeftValue = ( index ) => {
+        	var value = outerSpacing / 2
+        	var newIndex;
+
+        	for ( var i = 0; i < this.sortedPlanets().length; i++ ) {
+        		if ( this.sortedPlanets()[ i ] .name === this.planets[ index ].name ) {
+        			newIndex = i;
+        			break;
+        		}
+        	}
+
+        	for ( var i = 0; i < newIndex; i++ ) {
+        		value += this.sortedPlanets()[ i ].size + this.margin * 2;
+        	}
+
+        	return value;
+        }
+
+        this.toggleMenus = () => {
+
+        	this.menus.hidden = !this.menus.hidden
+
+	    	$timeout( () => {  
+	        	this.maxWidth = $planetContainer.clientWidth
+	        	this.calculatePlanetSize( currentSizeParameter )
+	    	}, 1 )
 
         }
 	}
