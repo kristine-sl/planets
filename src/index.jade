@@ -46,80 +46,82 @@ html( lang = 'no', ng-app = 'app' )
 							.info-data( ng-class = "{ 'is-active': solarSystem.currentTab === 'data' }" )
 								.info-data--general
 									.info-data-title General info
-									table.info-data-content
-										tr
-											td Mass
-											td {{ solarSystem.activePlanet.mass  | number:2}} km
-										tr
-											td Volume
-											td {{ solarSystem.activePlanet.volume | number:2 }} km
-										tr
-											td Mean radius
-											td {{ solarSystem.activePlanet.radius | number:2 }} km
-												sup 3
-										tr
-											td Min. Surface temperature
-											td {{ solarSystem.activePlanet.minTemperature | number:2 }} K
-										tr
-											td Max. Surface temperature
-											td {{ solarSystem.activePlanet.maxTemperature | number:2 }} K
-										tr
-											td Surface gravity
-											td {{ solarSystem.activePlanet.surfaceGravity | number:2 }} g
-										tr
-											td Orbital period
-											td {{ solarSystem.activePlanet.orbitalPeriod | number:2 }} days
-										tr
-											td Orbital speed
-											td {{ solarSystem.activePlanet.orbitalSpeed | number:2 }} km/s
-										tr
-											td Number of moons
-											td {{ solarSystem.activePlanet.moons | number:0 }}
-										tr
-											td Perihelion
-											td {{ solarSystem.activePlanet.perihelion | number:2 }} AU
-										tr
-											td Aphelion
-											td {{ solarSystem.activePlanet.aphelion | number:2 }} AU
-										tr
-											td Sidereal rotation period
-											td {{ solarSystem.activePlanet.rotationPeriod | number:2 }} hrs
+									.push-inwards
+										table.info-data-content
+											tr
+												td Mass
+												td {{ solarSystem.activePlanet.mass  | number:2}} km
+											tr
+												td Volume
+												td {{ solarSystem.activePlanet.volume | number:2 }} km
+											tr
+												td Mean radius
+												td {{ solarSystem.activePlanet.radius | number:2 }} km
+													sup 3
+											tr
+												td Min. Surface temperature
+												td {{ solarSystem.activePlanet.minTemperature | number:2 }} K
+											tr
+												td Max. Surface temperature
+												td {{ solarSystem.activePlanet.maxTemperature | number:2 }} K
+											tr
+												td Surface gravity
+												td {{ solarSystem.activePlanet.surfaceGravity | number:2 }} g
+											tr
+												td Orbital period
+												td {{ solarSystem.activePlanet.orbitalPeriod | number:2 }} days
+											tr
+												td Orbital speed
+												td {{ solarSystem.activePlanet.orbitalSpeed | number:2 }} km/s
+											tr
+												td Number of moons
+												td {{ solarSystem.activePlanet.moons | number:0 }}
+											tr
+												td Perihelion
+												td {{ solarSystem.activePlanet.perihelion | number:2 }} AU
+											tr
+												td Aphelion
+												td {{ solarSystem.activePlanet.aphelion | number:2 }} AU
+											tr
+												td Sidereal rotation period
+												td {{ solarSystem.activePlanet.rotationPeriod | number:2 }} hrs
 								.info-data--chemical
 									.info-data-title Chemical info
-									table.info-data-content
-										tr
-											td Oxygen
-											td {{ solarSystem.activePlanet.oxygen / solarSystem.activePlanet.volume | number:2 }} %
-										tr
-											td Carbon dioxide
-											td {{ solarSystem.activePlanet.carbonDioxide / solarSystem.activePlanet.volume | number:2 }} %
-										tr
-											td Carbon monoxide
-											td {{ solarSystem.activePlanet.carbonMonoxide / solarSystem.activePlanet.volume | number:2 }} %
-										tr
-											td Nitrogen
-											td {{ solarSystem.activePlanet.nitrogren / solarSystem.activePlanet.volume | number:2 }} %
-										tr
-											td Sulfur dioxide
-											td {{ solarSystem.activePlanet.sulfurDioxide / solarSystem.activePlanet.volume | number:2 }} %
-										tr
-											td Argon
-											td {{ solarSystem.activePlanet.argon / solarSystem.activePlanet.volume | number:2 }} %
-										tr
-											td Water vapor
-											td {{ solarSystem.activePlanet.waterVapor / solarSystem.activePlanet.volume | number:2 }} %
-										tr
-											td Helium
-											td {{ solarSystem.activePlanet.helium / solarSystem.activePlanet.volume | number:2 }} %
-										tr
-											td Hydrogen
-											td {{ solarSystem.activePlanet.hydrogen / solarSystem.activePlanet.volume | number:2 }} %
-										tr
-											td Sodium
-											td {{ solarSystem.activePlanet.sodium / solarSystem.activePlanet.volume | number:2 }} %
-										tr
-											td Potassium
-											td {{ solarSystem.activePlanet.potassium / solarSystem.activePlanet.volume | number:2 }} %
+									.push-inwards
+										table.info-data-content
+											tr
+												td Oxygen
+												td {{ solarSystem.activePlanet.oxygen / solarSystem.activePlanet.volume | number:2 }} %
+											tr
+												td Carbon dioxide
+												td {{ solarSystem.activePlanet.carbonDioxide / solarSystem.activePlanet.volume | number:2 }} %
+											tr
+												td Carbon monoxide
+												td {{ solarSystem.activePlanet.carbonMonoxide / solarSystem.activePlanet.volume | number:2 }} %
+											tr
+												td Nitrogen
+												td {{ solarSystem.activePlanet.nitrogren / solarSystem.activePlanet.volume | number:2 }} %
+											tr
+												td Sulfur dioxide
+												td {{ solarSystem.activePlanet.sulfurDioxide / solarSystem.activePlanet.volume | number:2 }} %
+											tr
+												td Argon
+												td {{ solarSystem.activePlanet.argon / solarSystem.activePlanet.volume | number:2 }} %
+											tr
+												td Water vapor
+												td {{ solarSystem.activePlanet.waterVapor / solarSystem.activePlanet.volume | number:2 }} %
+											tr
+												td Helium
+												td {{ solarSystem.activePlanet.helium / solarSystem.activePlanet.volume | number:2 }} %
+											tr
+												td Hydrogen
+												td {{ solarSystem.activePlanet.hydrogen / solarSystem.activePlanet.volume | number:2 }} %
+											tr
+												td Sodium
+												td {{ solarSystem.activePlanet.sodium / solarSystem.activePlanet.volume | number:2 }} %
+											tr
+												td Potassium
+												td {{ solarSystem.activePlanet.potassium / solarSystem.activePlanet.volume | number:2 }} %
 
 			.parameter-menu( ng-controller = 'ParameterCtrl as parameter' ng-hide = "parameter.menus.hidden" )
 				.parameter-tab-container

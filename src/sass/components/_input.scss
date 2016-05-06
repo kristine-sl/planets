@@ -4,6 +4,10 @@
 	align-items: center; 
 	margin: 0 20px; 
 
+	@media ( max-width: 920px ) {
+		margin: 0 6px; 
+	}
+
 	&-label
 	{
 		margin: 10px; 
@@ -20,6 +24,15 @@
 		// padding: map-get( $layout, 'parameter-padding' ); 
 		padding: 0; 
 		margin: 0;
+
+		@media ( max-width: 1200px ) {
+			height: 36px;
+		}
+
+		@media ( max-width: 920px ) {
+			height: 30px;
+			width: 150px
+		}
 	}
 
 	&-container
@@ -30,5 +43,9 @@
 		justify-content: center; 
 		align-items: center; 
 		z-index: map-get( $layout, 'input-z-index' );
+
+		@media ( max-width: 1200px ) {
+			justify-content: flex-start;
+		}
 	}
 }

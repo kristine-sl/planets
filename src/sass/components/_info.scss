@@ -32,6 +32,17 @@
 		margin-bottom: 24px;
 		height: 25%;
 		position: relative;
+
+		@media ( max-width: 920px ) {
+			flex-direction: column;
+			align-items: flex-start;
+			height: auto;
+
+			.info-title {
+				padding: 16px 0;
+				line-height: 120px;
+			}
+		}
 	}
 
 	&-title {
@@ -43,6 +54,11 @@
 
 	&-wrapper {
 		height: 75%;
+
+		@media ( max-width: 920px ) {
+			height: auto;
+			padding-bottom: 40px;
+		}
 	}
 
 	&-description {
@@ -55,8 +71,15 @@
 		display: none; 
 	}
 
-	&-description.is-active, &-data.is-active {
-		display: flex;  
+	&-description.is-active,
+	&-data.is-active {
+		display: flex;
+	}
+
+	&-data.is-active {
+		@media( max-width: 920px ) {
+			flex-direction: column;
+		}
 	}
 
 	&-tabs {
@@ -96,14 +119,20 @@
 
 		&--general,
 		&--chemical {
-			width: 49%; 
+			width: 50%; 
+
+			@media ( max-width: 920px ) {
+				width: 100%;
+				&:first-child {
+					margin-bottom: 20px;
+				}
+			}
 		}
 
 		&-content 
 		{
 			border: 0;
 			width: 100%;
-			padding: 0 12px;
 
 			td {
 				border: 0;

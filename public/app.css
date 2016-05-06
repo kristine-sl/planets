@@ -17,6 +17,9 @@ body {
   font-weight: normal;
   font-style: normal; }
 
+.push-inwards {
+  padding-right: 16px; }
+
 .container {
   position: relative;
   display: -webkit-box;
@@ -104,6 +107,22 @@ body {
     margin-bottom: 24px;
     height: 25%;
     position: relative; }
+    @media (max-width: 920px) {
+      .info-header {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+            -ms-flex-align: start;
+                    -ms-grid-row-align: flex-start;
+                align-items: flex-start;
+        height: auto; }
+        .info-header .info-title {
+          padding: 16px 0;
+          line-height: 120px; } }
   .info-title {
     font-size: 100px;
     font-weight: 800;
@@ -111,6 +130,10 @@ body {
     line-height: 85px; }
   .info-wrapper {
     height: 75%; }
+    @media (max-width: 920px) {
+      .info-wrapper {
+        height: auto;
+        padding-bottom: 40px; } }
   .info-description {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -126,6 +149,13 @@ body {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex; }
+  @media (max-width: 920px) {
+    .info-data.is-active {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column; } }
   .info-tabs {
     display: -webkit-box;
     display: -webkit-flex;
@@ -148,11 +178,15 @@ body {
       font-size: 24px;
       margin: 6px 0 12px; }
     .info-data--general, .info-data--chemical {
-      width: 49%; }
+      width: 50%; }
+      @media (max-width: 920px) {
+        .info-data--general, .info-data--chemical {
+          width: 100%; }
+          .info-data--general:first-child, .info-data--chemical:first-child {
+            margin-bottom: 20px; } }
     .info-data-content {
       border: 0;
-      width: 100%;
-      padding: 0 12px; }
+      width: 100%; }
       .info-data-content td {
         border: 0;
         padding: 3px 12px;
@@ -181,6 +215,9 @@ body {
       -ms-flex-align: center;
           align-items: center;
   margin: 0 20px; }
+  @media (max-width: 920px) {
+    .input {
+      margin: 0 6px; } }
   .input-label {
     margin: 10px;
     font-weight: 600;
@@ -192,6 +229,13 @@ body {
     border-radius: 20px;
     padding: 0;
     margin: 0; }
+    @media (max-width: 1200px) {
+      .input-box {
+        height: 36px; } }
+    @media (max-width: 920px) {
+      .input-box {
+        height: 30px;
+        width: 150px; } }
   .input-container {
     position: absolute;
     width: 100%;
@@ -208,6 +252,12 @@ body {
         -ms-flex-align: center;
             align-items: center;
     z-index: 1; }
+    @media (max-width: 1200px) {
+      .input-container {
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+            -ms-flex-pack: start;
+                justify-content: flex-start; } }
 
 .parameter {
   background: #2C3E60;
@@ -229,6 +279,15 @@ body {
   font-weight: 400;
   font-size: 14px;
   color: white; }
+  @media (max-width: 1200px) {
+    .parameter {
+      height: 36px;
+      font-size: 13px; } }
+  @media (max-width: 920px) {
+    .parameter {
+      height: 30px;
+      width: 150px;
+      font-size: 11px; } }
   .parameter-menu {
     height: 100%;
     display: -webkit-box;
@@ -268,6 +327,9 @@ body {
   .parameter-list {
     padding: 0;
     height: 100%; }
+    @media (max-width: 920px) {
+      .parameter-list {
+        overflow: scroll; } }
   .parameter-tab {
     background: #2C3E60;
     padding: 10px;
@@ -277,6 +339,13 @@ body {
     width: 100%;
     border-radius: 10px 10px 0 0;
     cursor: pointer; }
+    @media (max-width: 1200px) {
+      .parameter-tab {
+        height: 36px; } }
+    @media (max-width: 920px) {
+      .parameter-tab {
+        height: 30px;
+        font-size: 12px; } }
     .parameter-tab--active {
       background: #67809F;
       border: none; }

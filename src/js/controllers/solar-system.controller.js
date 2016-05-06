@@ -16,6 +16,8 @@ export default class SolarSystemCtrl {
 		
 		this.activePlanet = false;
 
+		var lastPlanet = false;
+
 		this.openPlanet = ( planet ) => {
 
 			if( this.activePlanet ) {
@@ -26,7 +28,7 @@ export default class SolarSystemCtrl {
 			planet.size = 100
 
 			$timeout( () => {
-				this.activePlanet = planet;
+				this.activePlanet = lastPlanet = planet;
 				for ( var i = 0; i < this.planets.length; i++ ) {
 					if ( this.planets[ i ].name === this.activePlanet.name ) {
 						this.planets[ i ].isOpen = true;
@@ -45,7 +47,7 @@ export default class SolarSystemCtrl {
 
 			$timeout( () => {
 				for ( var i = 0; i < this.planets.length; i++ ) {
-					if ( this.planets[ i ].name === this.activePlanet.name ) {
+					if ( this.planets[ i ].name === lastPlanet.name ) {
 						this.planets[ i ].isOpen = false;
 					}
 				}
